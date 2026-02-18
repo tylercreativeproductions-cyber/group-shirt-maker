@@ -3,43 +3,108 @@
 <head>
   <title>Group Shirt Maker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
+    :root{
+      --tcp-accent: #de5935;
+      --tcp-dark: #0a0a0a;
+      --tcp-cream: #f8f7f2;
+      --tcp-sand: #d9c5a7;
+      --tcp-gold: #f7cd46;
+      --tcp-tan: #bfae93;
+      --tcp-mocha: #8f7f66;
+      --tcp-white: #ffffff;
+    }
+
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 40px;
-      background-color: #f5f5f5;
+      background-color: var(--tcp-cream);
+      color: var(--tcp-dark);
     }
+
     h1 {
-      font-size: 32px;
+      font-size: 34px;
       margin-bottom: 10px;
     }
+
     p {
       font-size: 18px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
+
     button {
-      padding: 15px 25px;
-      font-size: 18px;
-      background-color: black;
-      color: white;
+      padding: 14px 24px;
+      margin: 10px;
+      font-size: 16px;
+      background-color: var(--tcp-accent);
+      color: var(--tcp-white);
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
+      transition: 0.2s ease-in-out;
     }
+
     button:hover {
-      background-color: #333;
+      filter: brightness(0.92);
+    }
+
+    .secondary {
+      background-color: var(--tcp-mocha);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .card {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: var(--tcp-white);
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     }
   </style>
 </head>
+
 <body>
 
-<h1>Group Shirt Maker</h1>
-<p>Design your group shirt in under 2 minutes.</p>
+  <!-- HOME SCREEN -->
+  <div id="homeScreen" class="card">
+    <h1>Group Shirt Maker</h1>
+    <p>Design your group shirt in under 2 minutes.</p>
+    <button onclick="showEventScreen()">Start New Design</button>
+  </div>
 
-<button onclick="alert('Design flow coming next!')">
-Start New Design
-</button>
+  <!-- EVENT SCREEN -->
+  <div id="eventScreen" class="card hidden">
+    <h1>Choose Your Event</h1>
+
+    <button>Family Reunion</button>
+    <button>Girls Trip</button>
+    <button>Birthday Squad</button>
+    <button>Class Reunion</button>
+    <button>Wedding Party</button>
+    <button>Custom Shirt</button>
+
+    <br><br>
+
+    <button class="secondary" onclick="goHome()">Back</button>
+  </div>
+
+  <script>
+    function showEventScreen() {
+      document.getElementById("homeScreen").classList.add("hidden");
+      document.getElementById("eventScreen").classList.remove("hidden");
+    }
+
+    function goHome() {
+      document.getElementById("eventScreen").classList.add("hidden");
+      document.getElementById("homeScreen").classList.remove("hidden");
+    }
+  </script>
 
 </body>
 </html>
