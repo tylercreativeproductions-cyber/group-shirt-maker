@@ -1,1 +1,1 @@
-# group-shirit-maker
+# group-shirt-maker
