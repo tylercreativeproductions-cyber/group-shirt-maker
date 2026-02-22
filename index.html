@@ -511,10 +511,14 @@
 
     function chooseEvent(eventName) {
       selectedEvent = eventName;
+
+        // 🔹 Reset fields so each event starts clean
+      resetCustomizeFields();
+
       document.getElementById("selectedEventChip").textContent = "Event: " + selectedEvent;
       hideAll();
       document.getElementById("templateScreen").classList.remove("hidden");
-    }
+}
 
     function chooseTemplate(templateName) {
       selectedTemplate = templateName;
@@ -536,7 +540,24 @@
       hideAll();
       document.getElementById("customizeScreen").classList.remove("hidden");
     }
+    function resetCustomizeFields() {
+  // Clear text fields so a new event starts fresh
+  document.getElementById("mainText").value = "";
+  document.getElementById("subText").value = "";
+  document.getElementById("yearText").value = "";
+  document.getElementById("locText").value = "";
 
+  // Reset style
+  document.getElementById("fontStyle").value = "bold";
+
+  // If you still have the old dropdown selects, reset them safely
+  const mainColor = document.getElementById("mainColor");
+  const subColor = document.getElementById("subColor");
+  if (mainColor) mainColor.value = "#ffffff";
+  if (subColor) subColor.value = "none";
+
+  // If swatches are integrated later, we’ll reset those too (next step)
+}
     function prefillDefaults() {
       const main = document.getElementById("mainText");
       const sub  = document.getElementById("subText");
