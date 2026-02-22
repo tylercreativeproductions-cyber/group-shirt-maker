@@ -584,24 +584,49 @@
       if (!loc.value) loc.value = "";
     }
 
-    function updatePreview() {
-      const mainVal = (document.getElementById("mainText").value || "YOUR TEXT").toUpperCase();
-      const subVal = (document.getElementById("subText").value || "").toUpperCase();
-      const yearVal = (document.getElementById("yearText").value || "").trim();
-      const locVal  = (document.getElementById("locText").value || "").trim();
+     function updatePreview() {
+   // --- Grab input values (NO placeholder defaults) ---
+      const titleVal = (document.getElementById("titleText")?.value || "").trim();
+      const subVal = (document.getElementById("subText")?.value || "").trim().toUpperCase();
+      const yearVal = (document.getElementById("yearText")?.value || "").trim();
+      const locVal  = (document.getElementById("locText")?.value  || "").trim();
 
-      document.getElementById("prevMain").textContent = mainVal;
-      document.getElementById("prevSub").textContent  = subVal;
+    // --- Preview elements ---
+      const titleEl = document.getElementById("prevTitle");
+      const subEl   = document.getElementById("prevSub");
+      const metaEl  = document.getElementById("prevMeta");
 
+    // Helper: set text + hide if empty
+      const setPreviewText = (el, value, displayWhenShown = "block") => {
+      if (!el) return;
+      const text = (value || "").toString().trim();
+      el.textContent = text;
+      el.style.display = text ? displayWhenShown : "none";
+    };
+
+    // --- Title (usually always shown; adjust if you want it hideable too) ---
+      if (titleEl) titleEl.textContent = titleVal || ""; // keep blank if empty
+
+    // --- Subtitle: hide if empty ---
+      setPreviewText(subEl, subVal);
+
+    // --- Meta (Year • Location): build only from fields that exist ---
       let meta = "";
-      if (yearVal && locVal) meta = yearVal + " • " + locVal;
+      if (yearVal && locVal) meta = `${yearVal} • ${locVal}`;
       else if (yearVal) meta = yearVal;
       else if (locVal) meta = locVal;
-     const metaEl = document.getElementById("prevMeta");
-      metaEl.textContent = meta;
 
-      // Hide meta line if empty
-      metaEl.style.display = meta.trim() ? "block" : "none";
+    // Hide meta line if empty
+  setPreviewText(metaEl, meta);
+
+    // ------------------------------------------------------------------
+    // Keep the rest of your existing preview logic below:
+    // - template selection (Big Bold Stack / Circle Badge / Minimal Line + Year)
+    // - colors / swatches
+    // - font sizes
+    // - anything else you're already doing
+    // ------------------------------------------------------------------
+}
 
       // Fonts (simple built-ins)
       const fontStyle = document.getElementById("fontStyle").value;
