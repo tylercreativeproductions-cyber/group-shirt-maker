@@ -813,7 +813,7 @@
         const wa = ctx.measureText(a).width;
         const wb = ctx.measureText(b).width;
 
-        if (wa <= 3200 && wb <= 3200) {
+        if (wa <= maxWidth && wb <= maxWidth) {
           const diff = Math.abs(wa - wb);
           if (diff < bestDiff) {
             bestDiff = diff;
